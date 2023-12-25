@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: sms_notification_app_development
+
+test:
+  <<: *default
+  database: sms_notification_app_test
+
+production:
+  <<: *default
+  database: sms_notification_app_production
+  username: sms_notification_app
+  password: <%= ENV["SMS_NOTIFICATION_APP_DATABASE_PASSWORD"] %>
